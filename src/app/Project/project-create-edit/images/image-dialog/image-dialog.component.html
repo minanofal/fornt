@@ -1,0 +1,34 @@
+<div class="container">
+<div class="card-body">
+<div class="row" >
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-12">
+            <label>Image</label>
+          <input
+            class="form-control"
+            type="file"
+            id="formFile"
+            (change)="onFile($event)"
+            multiple
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div  >
+        <img class="col-2" *ngFor="let i of this.newImages" [src]="i" />
+      </div>
+  <hr>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <button class="btn btn-secondary mb-2 button" (click)="this.activeModal.close(add())">
+            <i class="fal fa-plus mr-2"></i> Add Image
+          </button>
+      </div>
+      <div class="col-2"></div>
+  </div>
+</div>
+</div>

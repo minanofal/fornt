@@ -1,0 +1,57 @@
+<!-- <div class="container-fluid page mt-4">
+    <div class="NewUser">
+        <button class="btn btn-success mb-2" (click)="open()">
+          <i class="fal fa-plus mr-2"></i> New Image
+        </button>
+      </div>
+    <table>
+        <thead>
+            <th style="color: #000;">
+                Image
+            </th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of this.projectService.currentProject.value.images">
+                <td>
+                    <div  class="image" style="text-align: center; background-image: url(data:image\/*;base64,{{i.image}});"></div>
+                </td>
+                <td class="text-align: center;">
+                      <a (click)="delete(i.id)"style="  color: red;
+                      cursor: pointer;"><mat-icon>delete</mat-icon></a>
+                    
+                </td>
+            </tr>
+            <tr *ngFor="let i of  this.projectService.newImages.value">
+
+                <td>
+                    <img class="image" src="{{i.url}}" />
+                </td>
+                <td style="text-align: center;">
+                    <a (click)="delete(i.id)"style="  color: red;cursor: pointer;"><mat-icon>delete</mat-icon></a>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+<div class="container-fluid page mt-4">
+    <div class="NewUser">
+        <button class="btn btn-success mb-2" (click)="open()">
+          <i class="fal fa-plus mr-2"></i> New Image
+        </button>
+      </div>
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="row"  *ngFor="let i of this.projectService.currentProject.value.images" cdkDrag> 
+        <div class="col-8">
+            <div  class="image" style="text-align: center; background-image: url(data:image\/*;base64,{{i.image}});"></div>
+        </div>
+        <div class="col-4">
+        <a (click)="delete(i.id)"style="  color: red;
+        cursor: pointer;"><mat-icon>delete</mat-icon></a>
+        </div>
+        <hr>
+    </div>
+  </div>
+  </div>

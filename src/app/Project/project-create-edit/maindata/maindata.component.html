@@ -1,0 +1,220 @@
+<div class="container-fluid page mt-4">
+    <div class="container-fluid" *ngIf="this.load | async; else loading">
+        <div class="card">
+          <div class="container-fluid p-3">
+            <form class="user-main">
+              <div class="row" >
+                <div class="form-group">
+                  <label>Main Image</label>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input
+                        class="form-control"
+                        type="file"
+                        id="formFile"
+                        (change)="onFile($event)"
+                      />
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3" *ngIf=" this.isNewImage">
+                      <img src="{{ this.newImageUrl }}" width="100%" />
+                    </div>
+                    <div class="col-md-3" *ngIf=" !this.isNewImage">
+                    <div  class="image" style="text-align: center; background-image: url(data:image\/*;base64,{{this.projectService.currentProject.value.mainImage.image}});"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>English Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="EnglishName"
+                      [(ngModel)]="this.projectService.currentProject.value.name"
+                      (change)="this.EnglishName()"
+                      (click)="this.EnglishName()"
+                      placeholder="enter Project name"
+                    />
+                    <span class="text text-danger" *ngIf="!this.isEnglishName">
+                      *English Name is Required
+                    </span>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Arabic Name</label>
+                    <input
+                      type="text"
+                      class="form-control Arabic"
+                      name="ArabicName"
+                      [(ngModel)]="this.projectService.currentProject.value.nameInArabic"
+                      (change)="this.ArabicName()"
+                      (click)="this.ArabicName()"
+                      placeholder="الاسم"
+                    />
+                    <span class="text text-danger" *ngIf="!this.isArabicName">
+                      *Arabic Name is Required
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label>Developer</label>
+                      <mat-select
+                        class="form-control"
+                        matInput
+                        name="City"
+                        [(value)]=" this.projectService.currentProject.value.developerId"
+                      >
+                        <mat-option 
+                        *ngIf="this.projectService.currentProject.value.developerId == 0"
+                          >None</mat-option
+                        >
+                        <mat-option
+                        *ngFor="let t of this.developers"
+                        [value]="t.id"
+                        >
+                        {{t.name}}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Area</label>
+                    <mat-select
+                      class="form-control"
+                      matInput
+                      name="Area"
+                      [(value)]="this.projectService.currentProject.value.areaId"
+                    >
+                      <mat-option 
+                      *ngIf="this.projectService.currentProject.value.areaId == 0"
+                        >None</mat-option
+                      >
+                      <mat-option
+                      *ngFor="let t of this.areas"
+                      [value]="t.id"
+                      >
+                      {{t.name}}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>DisplayOrder</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="DisplayOrder"
+                      [(ngModel)]="this.projectService.currentProject.value.displayOrder"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Delevery Date</label>
+                      <input matInput [matDatepicker]="dp" [formControl]="date"  class="form-control" [readonly]="true">
+                      <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+                      <mat-datepicker #dp
+                                      startView="multi-year"
+                                      (monthSelected)="setMonthAndYear($event, dp)"
+                                      panelClass="example-month-picker">
+                      </mat-datepicker>
+                    </div>
+                    </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <label>Description In Arabic</label>
+                  <span
+                    class="text text-danger"
+                    *ngIf="!this.isArabicDiscription"
+                  >
+                    * Required
+                  </span>
+                  <textarea
+                    (change)="this.ArabicDiscription()"
+                    (click)="this.ArabicDiscription()"
+                    [(ngModel)]="this.projectService.currentProject.value. descriptionInArabic"
+                    class="form-control Arabic"
+                    placeholder="الشرح"
+                    name="descriptionInArabic"
+                    required
+                  >
+                  </textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <label>Description In English</label>
+                  <span
+                    class="text text-danger"
+                    *ngIf="!this.isEnglishDiscription"
+                  >
+                    * Required
+                  </span>
+                  <textarea
+                    (change)="this.EnglishDiscription()"
+                    (click)="this.EnglishDiscription()"
+                    [(ngModel)]="this.projectService.currentProject.value.description"
+                    class="form-control"
+                    placeholder="Description"
+                    name="description"
+                  >
+                  </textarea>
+                </div>
+              </div>
+              <div class="row" >
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>YouTupe URL</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="url"
+                      [(ngModel)]="this.url"
+                      (change)="this.Url()"
+                    />
+                  </div>
+                </div>
+                <div *ngIf="this.projectService.currentProject.value.videoUrl != ''">
+                <iframe  [src]="this.VideoURL()" height="500px" width="500px">
+                </iframe>
+              </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Location Url</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="location"
+                      [(ngModel)]="this.projectService.currentProject.value.loacationUrl"
+                    />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+<ng-template #loading>
+    <div class="p-3">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+  </ng-template>

@@ -1,0 +1,155 @@
+/* You can add global styles to this file, and also import other style files */
+$font-primary: Roboto, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
+  "Helvetica Neue", Arial, sans-serif !default; // Primary font: Roboto
+$font-secondary: Roboto, -apple-system, system-ui, BlinkMacSystemFont,
+  "Segoe UI", "Helvetica Neue", Arial, sans-serif !default; // Secondary font: Montserrat
+
+//==================================
+// 	Default color
+//==================================
+
+//bootstrap overrides
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+
+$blue: #007bff;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #28a745;
+$teal: #20c997;
+$cyan: #17a2b8;
+
+$primary: $blue;
+$secondary: $gray-600;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $primary;
+$light: $gray-100;
+$dark: $gray-800;
+
+$primary: #f40051;
+$secondary: #198fd5;
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+);
+
+//theme variables
+$default-dark: #515365;
+$default-white: #ffffff;
+$default-gray: #f6f7fb;
+$default-text-color: #888da8;
+$default-primary: $primary;
+$default-success: $success;
+$default-info: $info;
+$default-warning: $warning;
+$default-danger: $danger;
+
+//==================================
+// 	Inverse color
+//==================================
+$inverse-primary: lighten($default-primary, 30%);
+$inverse-success: lighten($default-success, 45%);
+$inverse-info: lighten($default-info, 45%);
+$inverse-warning: lighten($default-warning, 45%);
+$inverse-danger: lighten($default-danger, 35%);
+
+//==================================
+// 	Misc
+//==================================
+$border-color: #e6ecf5;
+$header-height: 65px;
+$offscreen-size: 280px;
+$collapsed-size: 70px;
+$side-nav-dark: #313644;
+$side-nav-dark-font: #99abb4;
+$side-nav-dark-border: rgba(120, 130, 140, 0.3);
+
+//==================================
+// 	Header Themes
+//==================================
+$theme-primary: $default-primary;
+$theme-info: $default-info;
+$theme-success: desaturate($default-success, 5%);
+$theme-danger: $danger;
+$theme-dark: lighten($side-nav-dark, 10%);
+
+//==================================
+// 	Social media color
+//==================================
+
+$facebook: #3b579d;
+$twitter: #2caae1;
+$instagram: #5d4a3b;
+$google-plus: #dc4a38;
+$pinterest: #c9181f;
+$skype: #00aaf1;
+$linkedin: #0177b5;
+$youtube: #de2825;
+$yahoo: #7b0099;
+$rss: #f58432;
+$dropbox: #007ee6;
+$sound-cloud: #ff6a22;
+$vimeo: #1bb6ec;
+$bing: #ffb900;
+$dribbble: #ea4c89;
+$html5: #f16528;
+$sharethis: #50b948;
+$tumblr: #36465d;
+$wordpress: #0087be;
+.page-container {
+	min-height: 100vh;
+	padding-left: $offscreen-size;
+
+	.main-content {
+		padding: 95px 15px 15px 15px;
+		min-height: calc(100vh - 60px);
+	}
+}
+
+.full-container {
+	position: absolute;
+    top: $header-height;
+    left: $offscreen-size;
+    right: 0px;
+    min-height: calc(100vh - #{$header-height});
+}
+
+.ng-enter {
+    transition: .5s;
+    opacity: 0;
+}
+
+.ng-enter-active {
+    opacity: 1;
+}
+
+.is-collapsed {
+
+	.page-container {
+		padding-left: $collapsed-size;
+	}
+
+	.full-container {
+		left: $collapsed-size;
+	}
+} 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */

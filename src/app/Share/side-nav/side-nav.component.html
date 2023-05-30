@@ -1,0 +1,18 @@
+<mat-nav-list>
+    <div class="logo">
+      <img src="../../../assets/Iamges/BarImage.png" alt="Company Logo" />
+    </div>  
+    <a mat-list-item
+    [routerLinkActiveOptions]="{ exact: true }"
+     routerLinkActive="list-item-active" routerLink="/">
+      <mat-icon>home</mat-icon> Home
+    </a>
+    <a mat-list-item  routerLinkActive="list-item-active" routerLink="/projects" ><mat-icon>view_module</mat-icon> Projects </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/developers" > <mat-icon>supervised_user_circle</mat-icon>Developer</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/Categories" > <mat-icon> category</mat-icon> Category</a>
+    <a mat-list-item  routerLinkActive="list-item-active" routerLink="/types" ><mat-icon>store</mat-icon>Types</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/cities" ><mat-icon>location_city</mat-icon> Cities </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/areas" > <mat-icon> location_on</mat-icon> Areas </a>
+    <a mat-list-item  routerLinkActive="list-item-active" routerLink="/users" > <mat-icon>person_pin</mat-icon> Users </a>
+
+  </mat-nav-list>

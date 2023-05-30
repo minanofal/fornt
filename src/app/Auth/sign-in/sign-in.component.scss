@@ -1,0 +1,59 @@
+body {
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+  }
+  
+.full-height {
+    min-height: 100vh;
+  }
+.bg{
+    background-size: cover;
+    background-position: center;
+}
+.auth-page{
+    overflow: hidden;
+}
+.login-form{
+    margin-top: 30%;
+    margin-left: 10%;
+    margin-right: 10%;
+    
+}
+.font-size-13 {
+    font-size: 13px !important;
+  }
+  .login-footer {
+    position: fixed;
+    bottom: 0px;
+    padding: 15px 30px;
+    width: 100%;
+  }
+
+.login{
+    width: 100%;
+}
+.img-caption {
+    background-color: black;
+    opacity: 0.5;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 30px;
+     width: 99%;
+     height: 80px;
+}
+.caption-title {
+    color: #ffffff;
+    font-size: 35px;
+    font-weight: 300;
+  }
+  .caption-text {
+    color: darken( #ffff, 10%);
+  }
+  .btn-login{
+    color: white;
+  }
+  .btn-primary{
+    background-color: #121c28;
+    border: none;
+  }

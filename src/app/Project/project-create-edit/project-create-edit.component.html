@@ -1,0 +1,88 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2" *ngIf="id == 0">
+      Create New Project
+    </div>
+    <div class="d-flex page__box p-3 mt-2" *ngIf="id != 0">Update Project</div>
+    <div class="page__content shadow p-3 position-relative">
+      <ng-template #loading>
+        <div class="card">
+          <div class="container-fluid p-3">
+            <mat-spinner [diameter]="50"></mat-spinner>
+          </div>
+        </div>
+      </ng-template>
+      <ul class="nav nav-tabs" role="tablist" #tabSet>
+        <li
+          class="nav-item"
+          *ngFor="let item of expectedComponentsInOrder; let i = index"
+        >
+          <a
+            class="nav-link {{ this.id === 0  ? 'disabled' : '' }}"
+            style="cursor: pointer;"
+            [ngClass]="Active(i + 1)"
+            role="tab"
+            data-toggle="tab"
+            (click)="this.loadComponent(i + 1)"
+            >{{ item.name }}</a
+          >
+        </li>
+      </ul>
+    <ng-content *ngComponentOutlet="default">
+    
+    </ng-content>
+      </div>
+      <div class="card">
+  
+        <div class="d-flex justify-content-end py-3">
+
+          <button *ngIf="!this.projectService.currentProject.value.isPublished" class="btn btn-info btn-lg mr-2" (click)="publish()">
+            <mat-icon *ngIf="!(this.busy | async)"> publish</mat-icon>
+            <div
+              *ngIf="this.busy | async"
+              class="spinner-grow spinner-grow-sm"
+              role="status"
+            >
+              <span class="sr-only text-sm">Loading...</span>
+            </div>
+            <span class="ml-2">Publish</span>
+          </button>
+          <button *ngIf="this.projectService.currentProject.value.isPublished" class="btn btn-warning btn-lg mr-2" (click)="publish()">
+            <mat-icon *ngIf="!(this.busy | async)"> publish</mat-icon>
+            <div
+              *ngIf="this.busy | async"
+              class="spinner-grow spinner-grow-sm"
+              role="status"
+            >
+              <span class="sr-only text-sm">Loading...</span>
+            </div>
+            <span class="ml-2">UnPublish</span>
+          </button>
+          <button class="btn btn-danger btn-lg mr-2" (click)="goBack()">
+            <i *ngIf="!(this.busy | async)" class="fal fa-arrow-left"></i>
+            <div
+              *ngIf="this.busy | async"
+              class="spinner-grow spinner-grow-sm"
+              role="status"
+            >
+              <span class="sr-only text-sm">Loading...</span>
+            </div>
+            <span class="ml-2">Cancel</span>
+          </button>
+          <button
+            class="btn btn-success btn-lg submit mr-4"
+            (click)="onSave()"
+            [attr.disabled]="(this.busy | async) ? this.busy : null"
+          >
+            <i *ngIf="!(this.busy | async)" class="fal fa-check"></i>
+            <div
+              *ngIf="this.busy | async"
+              class="spinner-grow spinner-grow-sm"
+              role="status"
+            >
+              <span class="sr-only text-sm">Loading...</span>
+            </div>
+            <span class="ml-2">Save</span>
+          </button>
+        </div>
+      </div>
+</div>

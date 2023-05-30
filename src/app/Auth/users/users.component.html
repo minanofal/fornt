@@ -1,0 +1,122 @@
+<div class="container-fluid page">
+  <div class="d-flex page__box p-3 mt-2">Users</div>
+  <div class="page__content shadow p-3 ">
+    <div class="NewUser">
+      <button class="btn btn-secondary mb-2"routerLink="/users/new">
+        <i class="fal fa-plus mr-2"></i> New User
+      </button>
+    </div>
+    <div class="card card-body">
+        <div class="d-flex row">
+          <h2 class="d-none d-lg-block font-weight-bold mb-0 mr-auto">
+            Filters
+          </h2>
+          <div>
+            <button class="btn btn-link mb-0 mr-2 p-0 position-absolute top-0 end-0 m-2" (click)="clearSearch()">
+            	<mat-icon>close</mat-icon>
+              <span class="ml-2">Clear Filters</span>
+            </button>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+              <label class="m-3">First Name</label>
+              <input type="text" class="form-control" [(ngModel)]="this.search.firstName" name="firstName"
+                placeholder="Search by user's first name" (keyup.enter)="this.loadItems()" />
+            </div>
+          </div>
+          <div class=" col-sm-12 col-md-4">
+            <div class="form-group">
+              <label class="m-3">Last Name</label>
+              <input type="text" class="form-control" [(ngModel)]="this.search.lastName" name="lastName"
+                placeholder="Search by user's last name" (keyup.enter)="this.loadItems()" />
+            </div>
+          </div>
+          <div class=" col-sm-12 col-md-4">
+            <div class="form-group">
+              <label class="m-3">Email</label>
+              <input type="text" class="form-control" [(ngModel)]="this.search.email" name="email"
+                placeholder="Search by user's email address" (keyup.enter)="this.loadItems()" />
+            </div>
+          </div>
+          <div class="col-6 m-4">
+            <div class="form-group">
+              <label>Role</label>
+              <mat-select
+                class="form-control"
+                matInput
+                name="Role"
+                [(value)]=" this.selectedRole"
+              >
+                <mat-option 
+                *ngIf="!this.selectedRole"
+                  >None</mat-option
+                >
+                <mat-option
+                *ngFor="let t of this.roles"
+                [value]="t.id"
+                >
+                {{t.name}}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end p-1">
+          <button class="btn btn-success mt-1" type="submit" (click)="onApplyFilters()"
+            [attr.disabled]="(this.isLoading | async) ? this.busy : null">
+            <div *ngIf="this.isLoading | async" class="spinner-grow spinner-grow-sm" role="status">
+              <span class="sr-only text-sm">Loading...</span>
+            </div>
+            <span class="ml-2 "><i class="fal fa-sliders-h mr-2"></i>Apply Filters</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card m-4">
+        <ng-template #loading>
+          <div class="p-3">
+            <mat-spinner [diameter]="50"></mat-spinner>
+          </div>
+        </ng-template>
+        <div *ngIf="this.busy | async; else loading">
+            <kendo-grid [data]="this.gridView" [sortable]="true" [pageSize]="state.take" [skip]="state.skip" [pageable]="true" scrollable="none"  (dataStateChange)="dataStateChange($event)">
+                <kendo-grid-column field="id" title="Id"> 
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{dataItem.id}}
+                      </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="Email" title="Email"> 
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{dataItem.email}}
+                      </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="firstName" title="Name"> 
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                       {{dataItem.fullName}}
+                      </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="Phone" title="Phone"> 
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{dataItem.phoneNumber}}
+                       </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="Role" title="Role"> 
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{dataItem.roleName}}
+                       </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column title="">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                      <a mat-icon-button color="secondary" matTooltip="Edit item" routerLink="/users/{{dataItem.id}}">
+                        <mat-icon>create</mat-icon>
+                      </a>
+                    </ng-template>
+                  </kendo-grid-column>
+              </kendo-grid>
+    </div>
+  </div>
+</div>
+

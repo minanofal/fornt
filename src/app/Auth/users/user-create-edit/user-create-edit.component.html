@@ -1,0 +1,147 @@
+<div class="container-fluid page">
+  <div class="d-flex page__box p-3 mt-2" *ngIf="id == 'new'">
+    Create New User
+  </div>
+  <div class="d-flex page__box p-3 mt-2" *ngIf="id != 'new'">Update User</div>
+  <div class="page__content shadow p-3 position-relative">
+    <ng-template #loading>
+      <div class="card">
+        <div class="container-fluid p-3">
+          <mat-spinner [diameter]="50"></mat-spinner>
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="container-fluid" *ngIf="this.load | async; else loading">
+      <div class="page-title mt-3">
+        <h3>{{this.user.firstName}} {{this.user.lastName}} {{this.user.email}}</h3>
+      </div>
+      <div class="card">
+        <div class="container-fluid p-3">
+          <form class="user-main">
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" class="form-control" name="firstName"  [(ngModel)]="this.user.firstName" (change)="this.FirstName()" (click)="this.FirstName()"
+                  placeholder="enter user's first name"  />
+                  <span  class="text text-danger" *ngIf="!this.isfirstname"  >
+                    *First Name is Required
+                   </span>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control" name="lastName"   [(ngModel)]="this.user.lastName"  (change)="this.LastName()" (click)="this.LastName()"
+                  placeholder="enter user's last name"  />
+                  <span class="text text-danger" *ngIf="!islastname"  >
+                    *Last Name is Required
+                   </span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email"     [(ngModel)]="this.user.email" (change)="this.Email()" (click)="this.Email()"
+                    placeholder="enter user's Email"  />
+                    <span class="text text-danger" *ngIf="!this.isemail"  >
+                      *please enter Email Like "a....@....com"
+                     </span>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Phone</label>
+                    <input  type="number" class="form-control" name="phone" [(ngModel)]="this.user.phoneNumber"  (change)="this.phone()"  (click)="this.phone()"
+                    placeholder="enter user's Phone"   />
+                    <span class="text text-danger" *ngIf="!isPhone"  >
+                      *Phone Number is Required
+                     </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                    <label>Role</label>
+                    <mat-select
+                      class="form-control"
+                      matInput
+                      name="Role"
+                      [(ngModel)]="this.user.roleId"
+                      (change)="this.role()"  (click)="this.role()"
+                    >
+                      <mat-option 
+                      
+                        >None</mat-option
+                      >
+                      <mat-option
+                      *ngFor="let t of this.roles"
+                      [value]="t.id"
+                      >
+                      {{t.name}}
+                      </mat-option>
+                    </mat-select>
+                    <span class="text text-danger" *ngIf="!isrole"  >
+                      *Role is Required
+                     </span>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label>Password</label>
+                      <input type="password" class="form-control" name="Password" (change)="this.Password()"   (click)="this.Password()"
+                      placeholder="enter user's Password" [(ngModel)]="this.user.password"  />
+                      <span class="text text-danger" *ngIf=" !this.isvalidPassword" >
+                        *password must be  At least 8 characters in length , Uppercase letters, Lowercase letters,Numbers Special characters
+                       </span>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" class="form-control" name="Password" [(ngModel)]="confermPassword" (change)="this.ConfirmPassword()" 
+                        placeholder="enter user's Password"  />
+                        <span class="text text-danger" *ngIf="!isonfirmPassword"  >
+                          *password not match
+                         </span>
+                      </div>
+                  </div>
+              </div>
+              <div class="d-flex justify-content-end py-3">
+                <button class="btn btn-danger btn-lg mr-2" (click)="goBack()">
+                  <i *ngIf="!(this.busy | async)" class="fal fa-arrow-left"></i>
+                  <div
+                    *ngIf="this.busy | async"
+                    class="spinner-grow spinner-grow-sm"
+                    role="status"
+                  >
+                    <span class="sr-only text-sm">Loading...</span>
+                  </div>
+                  <span class="ml-2">Cancel</span>
+                </button>
+                <button
+                  class="btn btn-success btn-lg submit"
+                  (click)="onSave()"
+                  [attr.disabled]="(this.busy | async) ? this.busy : null"
+                >
+                  <i *ngIf="!(this.busy | async)" class="fal fa-check"></i>
+                  <div
+                    *ngIf="this.busy | async"
+                    class="spinner-grow spinner-grow-sm"
+                    role="status"
+                  >
+                    <span class="sr-only text-sm">Loading...</span>
+                  </div>
+                  <span class="ml-2">Save</span>
+                </button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

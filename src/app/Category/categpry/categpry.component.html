@@ -1,0 +1,124 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">
+      Categories
+  </div>
+  <div class="page__content shadow p-3">
+    <div class="NewUser">
+        <button class="btn btn-secondary mb-2" routerLink="/Categories/0">
+          <i class="fal fa-plus mr-2"></i> New Category
+        </button>
+      </div>
+      <div class="card card-body">
+        <div class="d-flex row">
+          <h2 class="d-none d-lg-block font-weight-bold mb-0 mr-auto">
+            Filters
+          </h2>
+          <div>
+            <button
+              class="btn btn-link mb-0 mr-2 p-0 position-absolute top-0 end-0 m-2"
+              (click)="clearSearch()"
+            >
+              <mat-icon>close</mat-icon>
+              <span class="ml-2">Clear Filters</span>
+            </button>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label class="m-3">English Name</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="this.search.name"
+                name="nameEnglish"
+                placeholder="Search by Category Name"
+                (keyup.enter)="this.loadItems()"
+              />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label class="m-3">Arabic Name</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="this.search.nameInArabic"
+                name="nameArabic"
+                placeholder="Search by Category Name"
+                (keyup.enter)="this.loadItems()"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end p-1">
+          <button
+            class="btn btn-success mt-1"
+            type="submit"
+            (click)="onApplyFilters()"
+            [attr.disabled]="(this.isLoading | async) ? this.busy : null"
+          >
+            <div
+              *ngIf="this.isLoading | async"
+              class="spinner-grow spinner-grow-sm"
+              role="status"
+            >
+              <span class="sr-only text-sm">Loading...</span>
+            </div>
+            <span class="ml-2"
+              ><i class="fal fa-sliders-h mr-2"></i>Apply Filters</span
+            >
+          </button>
+        </div>
+      </div>
+      <div class="card m-4">
+        <ng-template #loading>
+          <div class="p-3">
+            <mat-spinner [diameter]="50"></mat-spinner>
+          </div>
+        </ng-template>
+        <div *ngIf="this.busy | async; else loading">
+          <kendo-grid
+            [data]="this.gridView"
+            [sortable]="true"
+            scrollable="none"
+          >
+          <kendo-grid-column field="id" title="Id">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              {{dataItem.id}}
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="EnglishName" title="English Name">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              {{dataItem.name}}
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="ArabicName" title="Arabic Name">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              {{dataItem.nameInArabic}}
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column title="">
+            <ng-template
+              kendoGridCellTemplate
+              let-dataItem
+              let-rowIndex="rowIndex"
+            >
+              <a
+                mat-icon-button
+                color="secondary"
+                matTooltip="Edit item"
+                routerLink="/Categories/{{ dataItem.id }}"
+              >
+                <mat-icon>create</mat-icon>
+              </a>
+            </ng-template>
+          </kendo-grid-column>
+          </kendo-grid>
+
+          </div>
+      </div>
+      
+    </div>
+  </div>

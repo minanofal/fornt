@@ -1,0 +1,43 @@
+table {
+    width: 100%;
+    border: black;
+    border: 3px;
+  }
+  td {
+    padding: 15px;
+    margin: 10px;
+  }
+  
+  th, td {
+    border-bottom: 1px solid #ddd;
+  }
+
+  th{
+    text-align: justify;
+    padding: 15px;
+    margin: 10px;
+    font-size: 20px;
+  }
+  .image{
+    background-repeat: no-repeat, repeat;
+    background-size:100% 100%;
+
+    width: 20%;
+    height: 100px;
+    transition: all .5s ease-in-out;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.NewUser{
+  text-align: right;
+ }
+
+ ::ng-deep .my-class .modal-dialog { 
+  max-width: 50%;
+  width: 50%;
+  height: 1000px;
+}
+#delete{
+  color: red;
+  cursor: pointer;
+}

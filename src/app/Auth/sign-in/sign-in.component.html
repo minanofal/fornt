@@ -1,0 +1,87 @@
+<div class="auth-page">
+  <div class="row">
+    <div class="col-md-8 no-pdd-horizon d-none d-md-block">
+      <div
+        class="full-height bg"
+        style="
+          background-image: url('../../../assets/Iamges/login-image/pexels-julia-kuzenkov-1974596\ \(1\).jpg');
+        "
+      >
+      <div class="img-caption">
+        <h1 class="caption-title">Your real estate consultant.</h1>
+      </div>
+    </div>
+    </div>
+    <div class="col-md-4 no-pdd-horizon">
+      <div class="login-form">
+        <h1>Login</h1>
+        <hr>
+        <br />
+        <!-- <ngb-alert >
+          <strong>Warning!</strong> Better check yourself, you're not looking too good.
+        </ngb-alert> -->
+         <div *ngIf="error">
+                  <div class="alert alert-warning" role="alert">
+                    {{error}}
+                  </div>
+         </div>
+        <p class="mrg-btm-15 font-size-13">
+          Please enter your user name and password to login
+        </p>
+        <form [formGroup]="form">
+          <div class="form-group">
+            <input
+              name="email"
+              type="text"
+              [(ngModel)]="this.user.email"
+              required
+              class="form-control"
+              id="email"
+              formControlName="email"
+              placeholder="Email address"
+            />
+            <div *ngIf="Email?.touched &&Email?.invalid"  class="alert alert-danger" role="alert">
+            <span   >
+              *please enter Email Like "a....@....com"
+              </span>
+              </div>
+          </div>
+          <br />
+          <div class="form-group">
+            <input
+              name="password"
+              type="password"
+              required
+              class="form-control"
+              id="password"
+              placeholder="Password"
+              formControlName="password"
+              [(ngModel)]="this.user.password"
+            />
+            <div *ngIf="Password?.touched &&Password?.invalid" class="alert alert-danger" role="alert">
+            <span>
+              *password Required
+             </span>
+             </div>
+          </div><br>
+           <div class="d-flex just-content-end">
+                    <button class="btn btn-primary btn-block login" ui-sref="index.main" (click)="this.signin()"  [disabled]="this.busy | async">
+                      <div *ngIf="this.busy | async" class="spinner-grow spinner-grow-sm l" role="status">
+                        <span class="sr-only text-sm">Loading...</span>
+                      </div>
+                      <span class="ml-2 btn-login" >Login</span>
+                    </button>
+                  </div>
+        </form>
+      </div>
+      <div class="login-footer">
+        <img
+          class="img-responsive inline-block"
+          src="../../../assets/Iamges/logo/logo.jpg"
+          width="100"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
